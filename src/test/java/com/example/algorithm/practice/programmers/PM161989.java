@@ -1,4 +1,4 @@
-package com.example.algorithm.practice;
+package com.example.algorithm.practice.programmers;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
