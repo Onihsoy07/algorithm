@@ -47,7 +47,7 @@ public class BOJ2533 {
             if (!visited[node]) {
                 dfs(node);
                 dp[start][0] += dp[node][1];
-                dp[start][1] += Math.max(dp[node][0], dp[node][1]);
+                dp[start][1] += Math.min(dp[node][0], dp[node][1]);
             }
         }
     }
