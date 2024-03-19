@@ -11,7 +11,7 @@ public class BOJ1520 {
     static int M;
     static int N;
     static int[][] map;
-    static boolean[][] visited;
+    static int[][] visited;
     static int result = 0;
     static int[] dx = {-1, 0, 1, 0};
     static int[] dy = {0, 1, 0, -1};
@@ -22,7 +22,7 @@ public class BOJ1520 {
         M = Integer.parseInt(st.nextToken());
         N = Integer.parseInt(st.nextToken());
         map = new int[M][N];
-        visited = new boolean[M][N];
+        visited = new int[M][N];
 
         for (int i = 0; i < M; i++) {
             st = new StringTokenizer(br.readLine());
@@ -34,15 +34,15 @@ public class BOJ1520 {
 
         dfs(0, 0);
 
+        System.out.println(visited);
         System.out.println(result);
     }
 
-    public static void dfs(int x, int y) {
-        visited[x][y] = true;
-
+    public static int dfs(int x, int y) {
         if (x == M - 1 && y == N - 1) {
             result++;
-            return;
+            visited[x][y] = 1;
+            return 1;
         }
 
         for (int i = 0; i < 4; i++) {
@@ -54,14 +54,18 @@ public class BOJ1520 {
             }
 
             if (map[x][y] > map[nx][ny]) {
-                if (visited[nx][ny] == true) {
-                    result++;
-                    return;
+                if (visited[nx][ny] == 0) {
+                    int a = dfs(nx, ny);
+                    System.out.println(String.format("%d  %d  + %d", x, y, a));
+                    visited[x][y] += a;
+                } else {
+                    result += visited[nx][ny];
+                    return visited[nx][ny];
                 }
-
-                dfs(nx, ny);
             }
         }
+
+        return visited[x][y];
     }
 
 }
