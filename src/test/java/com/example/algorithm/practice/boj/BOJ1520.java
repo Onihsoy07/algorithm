@@ -12,7 +12,6 @@ public class BOJ1520 {
     static int N;
     static int[][] map;
     static int[][] visited;
-    static int result = 0;
     static int[] dx = {-1, 0, 1, 0};
     static int[] dy = {0, 1, 0, -1};
 
@@ -32,17 +31,15 @@ public class BOJ1520 {
             }
         }
 
-        dfs(0, 0);
-
-        System.out.println(visited);
-        System.out.println(result);
+        System.out.println(dfs(0, 0));
     }
 
     public static int dfs(int x, int y) {
         if (x == M - 1 && y == N - 1) {
-            result++;
-            visited[x][y] = 1;
             return 1;
+        }
+        if (visited[x][y] != 0) {
+            return visited[x][y];
         }
 
         for (int i = 0; i < 4; i++) {
@@ -54,14 +51,7 @@ public class BOJ1520 {
             }
 
             if (map[x][y] > map[nx][ny]) {
-                if (visited[nx][ny] == 0) {
-                    int a = dfs(nx, ny);
-                    System.out.println(String.format("%d  %d  + %d", x, y, a));
-                    visited[x][y] += a;
-                } else {
-                    result += visited[nx][ny];
-                    return visited[nx][ny];
-                }
+                visited[x][y] += dfs(nx, ny);
             }
         }
 
