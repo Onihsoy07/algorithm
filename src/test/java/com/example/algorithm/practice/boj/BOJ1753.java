@@ -17,7 +17,7 @@ public class BOJ1753 {
     static int[] dist;
 
 
-    public static void main(String[] args) throws IOException {
+    public void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         V = Integer.parseInt(st.nextToken());
@@ -53,7 +53,7 @@ public class BOJ1753 {
 
     }
 
-    private static void dijkstra(int start) {
+    private void dijkstra(int start) {
         PriorityQueue<Node> queue = new PriorityQueue<>();
         queue.add(new Node(start, 0));
         dist[start] = 0;
@@ -78,19 +78,19 @@ public class BOJ1753 {
 
     }
 
-}
+    class Node implements Comparable<Node> {
 
-class Node implements Comparable<Node> {
+        int end, weight;
 
-    int end, weight;
+        public Node(int end, int weight) {
+            this.end = end;
+            this.weight = weight;
+        }
 
-    public Node(int end, int weight) {
-        this.end = end;
-        this.weight = weight;
+        @Override
+        public int compareTo(Node o) {
+            return weight - o.weight;
+        }
     }
 
-    @Override
-    public int compareTo(Node o) {
-        return weight - o.weight;
-    }
 }
