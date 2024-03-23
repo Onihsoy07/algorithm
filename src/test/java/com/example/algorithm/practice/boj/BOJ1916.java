@@ -16,7 +16,7 @@ public class BOJ1916 {
     static boolean[] visited;
     static int[] dist;
 
-    public static void main(String[] args) throws IOException {
+    public void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
         N = Integer.parseInt(br.readLine());
@@ -48,7 +48,7 @@ public class BOJ1916 {
         System.out.println(dist[busEnd]);
     }
 
-    private static void dijkstra(int start) {
+    private void dijkstra(int start) {
         PriorityQueue<Node> queue = new PriorityQueue<>();
         queue.add(new Node(start, 0));
         dist[start] = 0;
@@ -73,19 +73,19 @@ public class BOJ1916 {
 
     }
 
-}
+    class Node implements Comparable<Node> {
 
-class Node implements Comparable<Node> {
+        int end, weight;
 
-    int end, weight;
+        public Node(int end, int weight) {
+            this.end = end;
+            this.weight = weight;
+        }
 
-    public Node(int end, int weight) {
-        this.end = end;
-        this.weight = weight;
+        @Override
+        public int compareTo(Node o) {
+            return this.weight - o.weight;
+        }
     }
 
-    @Override
-    public int compareTo(Node o) {
-        return this.weight - o.weight;
-    }
 }
